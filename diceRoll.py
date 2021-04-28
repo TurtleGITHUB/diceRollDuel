@@ -1,15 +1,13 @@
 """
-Program: layoutdemo.py
+Program: diceRoll.py
 Author: Robert 4/19/2021
 
 *** Note: the file breezypythongui.py MUST be in the same directoty as this file for the application to work and MUST IMPORT pyttsx3.
 """
 
 from breezypythongui import EasyFrame
-from tkinter import *
 import random
 import pyttsx3
-
 
 
 
@@ -18,17 +16,23 @@ class DiceRoll(EasyFrame):
 
 	def __init__(self):
 		"""Sets up the window and the label."""
-		EasyFrame.__init__(self, title = "Dice Roll", width = 600, height = 400, background = "lightyellow")
+		EasyFrame.__init__(self, title = "Dice Roll", width = 600, height = 400, background = "lightgreen")
+		
 		# 
-		self.addLabel(text = "It's time to Duel!", row = 0,column = 2, font = "Arial", background = "lightgreen", sticky = "N")
-		self.player1 = self.addLabel(text = "Player's Dice Roll", row = 2, column = 0, columnspan = 2, font = "Arial", background = "lightblue", sticky = "W")
-		self.computer1 = self.addLabel(text = "Computer's Dice Roll", row = 2, column = 3, columnspan = 2, font = "Arial", background = "pink", sticky = "E")
-		self.button = self.addButton(text = "Duel!", row = 3, column = 2, command = self.playGame)
+		self.addLabel(text = "It's time to Duel!", row = 0, column = 2, columnspan = 1, background = "yellow", sticky = "NSEW").config(font = ("Arial Black", 12))
 
-		self.playerRoll = self.addIntegerField(value = 0, row = 3, column = 0, sticky = "S")
-		self.computerRoll = self.addIntegerField(value = 0, row = 3, column = 3, sticky = "S")
-		self.resultArea = self.addLabel(text = "", row = 4, column = 2, font = "Arial", background = "lightyellow")
-	
+		self.player1 = self.addLabel(text = "Player's Dice Roll", row = 1, column = 0, columnspan = 1, background = "lightblue", sticky = "W").config(font = ("Arial Black", 10))
+		
+		self.computer1 = self.addLabel(text = "Computer's Dice Roll", row = 1, column = 3, columnspan = 1, background = "pink", sticky = "E").config(font = ("Arial Black", 10))
+		
+		self.button = self.addButton(text = "DUEL", row = 2, column = 2, command = self.playGame).config(font = ("Arial Black", 20))
+
+		self.playerRoll = self.addIntegerField(value = 0, row = 2, column = 0, sticky = "N")
+		
+		self.computerRoll = self.addIntegerField(value = 0, row = 2, column = 3, sticky = "N")
+		
+		self.resultArea = self.addLabel(text = "", row = 3, column = 2, background = "lightgreen", sticky = "S")
+		self.resultArea.config(font = ("Arial Black", 12))
 
 
 	def playGame(self):
@@ -47,7 +51,7 @@ class DiceRoll(EasyFrame):
 			text = "You must be cheating!"
 			engine.say(text)
 			
-			engine.runAndWait(2)
+			engine.runAndWait()
 
 		elif playerRoll == computerRoll:
 			result = "Its a Tie, play again!"
